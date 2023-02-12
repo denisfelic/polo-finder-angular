@@ -1,0 +1,25 @@
+<div class="overflow-x-auto">
+  <table class="table w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Distância</th>
+        <th>Polo</th>
+        <th>Endereço</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let polo of polos" class="hover">
+        <th>{{polo.id}}</th>
+        <td >{{polo.distance}}</td>
+        <td>{{polo.name}}</td>
+        <td>{{ polo.address}}</td>
+        <td>{{polo.city}}</td>
+        <td>{{polo.state}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
