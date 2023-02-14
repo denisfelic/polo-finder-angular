@@ -14,7 +14,11 @@ export class PoloListComponent {
   constructor(
     private poloService: PoloService
   ) {
-    this.polos = poloService.getAllPolos();
+    this.polos = this.poloService.getAllPolos();
+  }
+
+  showDistance(): boolean {
+    return this.poloService.userLocation !== undefined;
   }
 
 }

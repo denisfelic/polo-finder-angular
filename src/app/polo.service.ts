@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Polo, CreatePoloDto } from './types';
+import { Polo, CreatePoloDto, GeoLocation } from './types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PoloService {
 
-  hasUserDistance: boolean = false;
+  userLocation: GeoLocation | undefined;
+
   private polos: Polo[] = [
     {
       id: 1,
       name: 'Univesp Vila Nova Curuça',
-      distance: '7km',
       address: 'Av. Getúlio Vargas, nº 1200 - Vila Nova Santana, Assis. CEP: 19807-130.	',
       city: 'São Paulo',
       state: 'SP',
@@ -23,7 +23,6 @@ export class PoloService {
     {
       id: 2,
       name: 'Univesp Carrão',
-      distance: '7km',
       address: 'Av. Getúlio Vargas, nº 1200 - Vila Nova Santana, Assis. CEP: 19807-130.	',
       city: 'São Paulo',
       state: 'SP',
@@ -40,7 +39,6 @@ export class PoloService {
     // call from api
     const newPolo = {
       id: this.polos.length + 1,
-      distance: '2km',
       ...polo,
     };
 
@@ -48,6 +46,43 @@ export class PoloService {
   }
 
   getAllPolos(): Polo[] {
-    return this.polos;
+    if (this.userLocation)
+      return this.polos;
+    else {
+      return this.getAllPolosFromUserLocalization();
+    }
+  }
+
+
+  private getAllPolosFromUserLocalization(): Polo[] {
+
+    // TODO: request for api all polos based on user location
+
+    return [
+      {
+        id: 1,
+        name: 'Univesp Vila Nova Curuça',
+        distance: '7km',
+        address: 'Av. Getúlio Vargas, nº 1200 - Vila Nova Santana, Assis. CEP: 19807-130.	',
+        city: 'São Paulo',
+        state: 'SP',
+        location: {
+          latitude: -123,
+          longitude: 213,
+        }
+      },
+      {
+        id: 2,
+        name: 'Univesp Carrão',
+        distance: '7km',
+        address: 'Av. Getúlio Vargas, nº 1200 - Vila Nova Santana, Assis. CEP: 19807-130.	',
+        city: 'São Paulo',
+        state: 'SP',
+        location: {
+          latitude: -123,
+          longitude: 213,
+        }
+      }
+    ];
   }
 }

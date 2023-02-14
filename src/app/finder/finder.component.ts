@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GeoLocation } from '../types';
+import { PoloService } from '../polo.service';
 
 @Component({
   selector: 'app-finder',
@@ -10,28 +11,46 @@ import { GeoLocation } from '../types';
 export class FinderComponent {
 
   geolocation: GeoLocation | undefined;
+  hasUserLocation: boolean = false;
+
+  constructor(
+    private poloService: PoloService,
+  ) { }
+
+  ngOnInit() {
+    this.requestUserLocation(false);
+  }
 
 
 
-  requestUserLocation() {
+  requestUserLocation(showLocalizationErrorPopup: boolean = true) {
+    let hasLocationPermission = true;
+
     navigator.permissions && navigator.permissions.query({ name: 'geolocation' })
       .then(function (PermissionStatus) {
         if (PermissionStatus.state == 'prompt') {
           navigator.geolocation.getCurrentPosition((position) => { });
         } else if (PermissionStatus.state !== "granted") {
-          alert('Yo should allow access to your location.')
+          if (showLocalizationErrorPopup)
+            alert('Yo should allow access to your location.')
+          hasLocationPermission = false;
         }
       });
 
     this.getLocation();
   }
 
-  getLocation() {
+  private getLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
       const longitude = position.coords.longitude;
       const latitude = position.coords.latitude;
-      console.log(longitude, latitude);
 
+
+      this.poloService.userLocation = {
+        latitude: latitude,
+        longitude: longitude,
+      }
+      this.hasUserLocation = true;
     });
   }
 

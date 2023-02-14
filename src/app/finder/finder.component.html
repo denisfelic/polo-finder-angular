@@ -1,3 +1,3 @@
-<div class="w-full flex justify-center" (click)="requestUserLocation()">
-  <button class="btn btn-primary">Buscar polos próximos</button>
+<div *ngIf="hasUserLocation === false" class="flex justify-center w-full" (click)="requestUserLocation()">
+  <button class="btn btn-primary">Polos próximos a mim</button>
 </div>

@@ -7,7 +7,7 @@ export interface GeoLocation {
 
 export interface Polo {
   id: number;
-  distance: string;
+  distance?: string;
   name: string;
   address: string;
   city: string;
