@@ -45,8 +45,9 @@ export class PoloService {
     this.polos.push(newPolo);
   }
 
+  // TODO: Fix bug
   getAllPolos(): Polo[] {
-    if (this.userLocation)
+    if (!this.userLocation?.latitude && !this.userLocation?.longitude)
       return this.polos;
     else {
       return this.getAllPolosFromUserLocalization();
