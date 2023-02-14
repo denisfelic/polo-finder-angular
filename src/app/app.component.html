@@ -1,9 +1,10 @@
-<div class="h-full bg-teal-100 min-h-screen w-full flex flex-col">
+<div class="flex flex-col w-full h-full min-h-screen bg-teal-100">
   <header class="navbar bg-base-100">
     <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl">Univesp - Buscador de polos</a>
+      <a routerLink="/" class="text-xl normal-case btn btn-ghost">Univesp - Buscador de polos</a>
     </div>
     <div class="flex-none">
+      <a routerLink="/cadastro" class="text-xl normal-case btn btn-ghost">Cadastro</a>
       <button class="btn btn-square btn-ghost">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
           class="inline-block w-5 h-5 stroke-current">
@@ -16,9 +17,6 @@
   </header>
 
   <main class="p-5">
-    <app-finder></app-finder>
-    <div class="mt-5">
-      <app-polo-list></app-polo-list>
-    </div>
+    <router-outlet></router-outlet>
   </main>
 </div>

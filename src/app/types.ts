@@ -12,5 +12,13 @@ export interface Polo {
   address: string;
   city: string;
   state: string;
-  location: GeoLocation;
+  location?: GeoLocation;
+}
+
+export interface CreatePoloDto {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  location?: GeoLocation;
 }
